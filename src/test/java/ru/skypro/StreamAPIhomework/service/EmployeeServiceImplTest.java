@@ -8,7 +8,7 @@ import ru.skypro.StreamAPIhomework.exception.EmployeeNotFoundException;
 import ru.skypro.StreamAPIhomework.exception.EmployeeStorageIsFullException;
 import ru.skypro.StreamAPIhomework.model.Employee;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmployeeServiceImplTest {
 

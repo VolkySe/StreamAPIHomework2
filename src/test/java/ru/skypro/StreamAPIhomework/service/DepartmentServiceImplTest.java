@@ -9,7 +9,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.skypro.StreamAPIhomework.model.Employee;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,8 +48,9 @@ class DepartmentServiceImplTest {
         //then
         Assertions.assertEquals(expectedSumSalary, actualSumSalary);
     }
+
     @Test
-    void shouldReturnEmployeeWithMaxSalary(){
+    void shouldReturnEmployeeWithMaxSalary() {
         //given
         int departmentId = 1;
         Employee expectedEmployee = mockEmployees.get("JohnDoe");
@@ -56,8 +60,9 @@ class DepartmentServiceImplTest {
         //then
         Assertions.assertEquals(expectedEmployee, actualEmployee);
     }
+
     @Test
-    void shouldReturnEmployeeWithMinSalary(){
+    void shouldReturnEmployeeWithMinSalary() {
         //given
         int departmentId = 1;
         Employee expectedEmployee = mockEmployees.get("John1Doe1");
@@ -67,8 +72,9 @@ class DepartmentServiceImplTest {
         //then
         Assertions.assertEquals(expectedEmployee, actualEmployee);
     }
+
     @Test
-    void shouldCorrectlyReturnEmployeesByDepartmentId(){
+    void shouldCorrectlyReturnEmployeesByDepartmentId() {
         //given
         int departmentId = 2;
         Collection<Employee> expectedEmployees = List.of(new Employee[]{
@@ -83,7 +89,7 @@ class DepartmentServiceImplTest {
     }
 
     @Test
-    void shouldCorrectlyGroupEmployeesByDepartmentId(){
+    void shouldCorrectlyGroupEmployeesByDepartmentId() {
         //given
         Mockito.when(employeeServiceMock.getAllEmployee()).thenReturn(mockEmployees.values());
         Map<Integer, List<Employee>> expectedEmployees = employeeServiceMock.getAllEmployee().stream()
@@ -91,6 +97,6 @@ class DepartmentServiceImplTest {
         //when
         Map<Integer, List<Employee>> actualEmployees = departmentService.getAllEmployeesGroupedByDepartment();
         //then
-        Assertions.assertEquals(expectedEmployees,actualEmployees);
+        Assertions.assertEquals(expectedEmployees, actualEmployees);
     }
 }
