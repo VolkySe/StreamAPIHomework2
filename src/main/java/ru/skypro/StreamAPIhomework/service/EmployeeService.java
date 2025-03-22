@@ -12,4 +12,6 @@ public interface EmployeeService {
     Employee find(String firstName, String lastName);
 
     Collection<Employee> getAllEmployee();
+
+    int getMaxEmployeeCountInCompany();
 }
