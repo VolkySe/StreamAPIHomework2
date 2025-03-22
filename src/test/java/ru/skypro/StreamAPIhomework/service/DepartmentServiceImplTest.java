@@ -9,8 +9,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.skypro.StreamAPIhomework.model.Employee;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @ExtendWith(MockitoExtension.class)
 class DepartmentServiceImplTest {
@@ -67,5 +67,30 @@ class DepartmentServiceImplTest {
         //then
         Assertions.assertEquals(expectedEmployee, actualEmployee);
     }
+    @Test
+    void shouldCorrectlyReturnEmployeesByDepartmentId(){
+        //given
+        int departmentId = 2;
+        Collection<Employee> expectedEmployees = List.of(new Employee[]{
+                mockEmployees.get("John7Doe7"),
+                mockEmployees.get("John8Doe8"),
+                mockEmployees.get("John9Doe9")});
+        Mockito.when(employeeServiceMock.getAllEmployee()).thenReturn(mockEmployees.values());
+        //when
+        List<Employee> actualEmployees = departmentService.getAllEmployeesInDepartment(2);
+        //then
+        Assertions.assertEquals(expectedEmployees, actualEmployees);
+    }
 
+    @Test
+    void shouldCorrectlyGroupEmployeesByDepartmentId(){
+        //given
+        Mockito.when(employeeServiceMock.getAllEmployee()).thenReturn(mockEmployees.values());
+        Map<Integer, List<Employee>> expectedEmployees = employeeServiceMock.getAllEmployee().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartmentId));
+        //when
+        Map<Integer, List<Employee>> actualEmployees = departmentService.getAllEmployeesGroupedByDepartment();
+        //then
+        Assertions.assertEquals(expectedEmployees,actualEmployees);
+    }
 }
